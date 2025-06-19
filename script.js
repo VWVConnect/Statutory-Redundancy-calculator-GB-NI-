@@ -65,4 +65,3 @@ document.addEventListener('DOMContentLoaded', function () {
     regionSwitch.checked = false; // Default to GB
   });
 });
-
