@@ -18,6 +18,13 @@ html, body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
+/* Header */
+h1 {
+  text-align: center;
+  margin-bottom: 24px;
+  color: #192543;
+}
+
 /* Labels */
 label {
   display: block;
@@ -39,21 +46,29 @@ input[type="number"] {
   color: #192543;
 }
 
-/* Radio buttons */
-fieldset {
-  border: none;
-  margin: 10px 0;
-  padding: 0;
+/* Toggle switch styles */
+.toggle-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 16px 0;
 }
 
-legend {
-  font-weight: bold;
+.toggle-btn {
+  flex: 1;
+  padding: 12px;
+  border: 2px solid #00a6c5;
+  border-radius: 8px;
+  background-color: white;
   color: #192543;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
-label input[type="radio"] {
-  margin-right: 6px;
-  accent-color: #07b0a0;
+.toggle-btn.selected {
+  background-color: #00a6c5;
+  color: #192543;
 }
 
 /* Button container */
@@ -90,5 +105,5 @@ button#resetBtn {
   margin-top: 16px;
   font-weight: bold;
   color: #192543;
+  text-align: center;
 }
-
