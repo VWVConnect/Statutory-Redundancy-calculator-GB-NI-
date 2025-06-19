@@ -6,14 +6,30 @@ document.addEventListener('DOMContentLoaded', function () {
   const calculateBtn = document.getElementById('calculateBtn');
   const resetBtn = document.getElementById('resetBtn');
 
+  const gbBtn = document.getElementById('gbBtn');
+  const niBtn = document.getElementById('niBtn');
+  let selectedRegion = 'GB';
+
+  // Toggle region buttons
+  gbBtn.addEventListener('click', () => {
+    selectedRegion = 'GB';
+    gbBtn.classList.add('selected');
+    niBtn.classList.remove('selected');
+  });
+
+  niBtn.addEventListener('click', () => {
+    selectedRegion = 'NI';
+    niBtn.classList.add('selected');
+    gbBtn.classList.remove('selected');
+  });
+
+  // Calculate redundancy pay
   calculateBtn.addEventListener('click', function () {
     const age = parseInt(ageInput.value);
     const years = parseInt(yearsInput.value);
     let pay = parseFloat(payInput.value);
-    const region = document.querySelector('input[name="region"]:checked').value;
 
-    // 2025 pay caps
-    const maxWeeklyPay = region === 'GB' ? 700 : 643;
+    const maxWeeklyPay = selectedRegion === 'GB' ? 700 : 643;
 
     if (isNaN(age) || isNaN(years) || isNaN(pay)) {
       resultOutput.textContent = 'Please fill in all fields correctly.';
@@ -51,14 +67,17 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const redundancyPay = (totalWeeks * pay).toFixed(2);
-    resultOutput.textContent = `Statutory Redundancy Pay (${region === 'GB' ? 'Great Britain' : 'Northern Ireland'}): £${redundancyPay}`;
+    resultOutput.textContent = `Statutory Redundancy Pay (${selectedRegion === 'GB' ? 'Great Britain' : 'Northern Ireland'}): £${redundancyPay}`;
   });
 
+  // Reset button
   resetBtn.addEventListener('click', function () {
     ageInput.value = '';
     yearsInput.value = '';
     payInput.value = '';
     resultOutput.textContent = '';
-    document.querySelector('input[name="region"][value="GB"]').checked = true;
+    selectedRegion = 'GB';
+    gbBtn.classList.add('selected');
+    niBtn.classList.remove('selected');
   });
 });
