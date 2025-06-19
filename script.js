@@ -16,7 +16,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const years = parseInt(yearsInput.value);
     let pay = parseFloat(payInput.value);
     const region = getSelectedRegion();
-
     const maxWeeklyPay = region === 'GB' ? 700 : 643;
 
     if (isNaN(age) || isNaN(years) || isNaN(pay)) {
@@ -40,11 +39,10 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     pay = Math.min(pay, maxWeeklyPay);
-    let totalWeeks = 0;
 
+    let totalWeeks = 0;
     for (let i = 0; i < years; i++) {
       const yearAge = age - (years - 1 - i);
-
       if (yearAge < 22) {
         totalWeeks += 0.5;
       } else if (yearAge < 41) {
