@@ -17,8 +17,7 @@ html, body {
 }
 
 h1 {
-  text-align: center;
-  margin-bottom: 24px;
+  display: none; /* Hide the title */
 }
 
 label {
