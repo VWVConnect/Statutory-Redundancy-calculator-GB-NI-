@@ -19,12 +19,11 @@
     <label for="pay">Weekly Gross Pay (£):</label>
     <input type="number" id="pay" min="0" placeholder="e.g. 500" required />
 
-    <!-- Region selector -->
-    <fieldset>
-      <legend>Select your region:</legend>
-      <label><input type="radio" name="region" value="GB" checked /> Great Britain</label>
-      <label><input type="radio" name="region" value="NI" /> Northern Ireland</label>
-    </fieldset>
+    <!-- Region toggle switch -->
+    <div class="toggle-container">
+      <button id="gbBtn" class="toggle-btn selected">Great Britain</button>
+      <button id="niBtn" class="toggle-btn">Northern Ireland</button>
+    </div>
 
     <div class="button-group">
       <button id="calculateBtn">Calculate</button>
@@ -37,3 +36,4 @@
   <script src="script.js"></script>
 </body>
 </html>
+
