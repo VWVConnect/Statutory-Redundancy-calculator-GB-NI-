@@ -15,8 +15,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const age = parseInt(ageInput.value);
     const years = parseInt(yearsInput.value);
     let pay = parseFloat(payInput.value);
-    const region = getSelectedRegion();
-    const maxWeeklyPay = region === 'GB' ? 700 : 643;
+    const selectedRegion = getSelectedRegion();
+    const maxWeeklyPay = selectedRegion === 'GB' ? 700 : 643;
 
     if (isNaN(age) || isNaN(years) || isNaN(pay)) {
       resultOutput.textContent = 'Please fill in all fields correctly.';
@@ -39,10 +39,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     pay = Math.min(pay, maxWeeklyPay);
-
     let totalWeeks = 0;
+
     for (let i = 0; i < years; i++) {
       const yearAge = age - (years - 1 - i);
+
       if (yearAge < 22) {
         totalWeeks += 0.5;
       } else if (yearAge < 41) {
@@ -53,14 +54,14 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const redundancyPay = (totalWeeks * pay).toFixed(2);
-    resultOutput.textContent = `Statutory Redundancy Pay (${region === 'GB' ? 'Great Britain' : 'Northern Ireland'}): £${redundancyPay}`;
+    resultOutput.textContent = `Statutory Redundancy Pay (${selectedRegion === 'GB' ? 'Great Britain' : 'Northern Ireland'}): £${redundancyPay}`;
   });
 
   resetBtn.addEventListener('click', function () {
     ageInput.value = '';
     yearsInput.value = '';
     payInput.value = '';
-    regionSwitch.checked = false; // Default to GB
     resultOutput.textContent = '';
+    regionSwitch.checked = false; // Default to GB
   });
 });
