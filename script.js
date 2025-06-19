@@ -15,8 +15,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const age = parseInt(ageInput.value);
     const years = parseInt(yearsInput.value);
     let pay = parseFloat(payInput.value);
-    const selectedRegion = getSelectedRegion();
-    const maxWeeklyPay = selectedRegion === 'GB' ? 700 : 643;
+    const region = getSelectedRegion();
+
+    // GOV.UK statutory caps
+    const maxWeeklyPay = region === 'GB' ? 719 : 749;
+    const maxYears = 20;
 
     if (isNaN(age) || isNaN(years) || isNaN(pay)) {
       resultOutput.textContent = 'Please fill in all fields correctly.';
@@ -38,11 +41,16 @@ document.addEventListener('DOMContentLoaded', function () {
       return;
     }
 
+    // Apply statutory cap to weekly pay
     pay = Math.min(pay, maxWeeklyPay);
+
+    // Only use last 20 full years
+    const effectiveYears = Math.min(years, maxYears);
     let totalWeeks = 0;
 
-    for (let i = 0; i < years; i++) {
-      const yearAge = age - (years - 1 - i);
+    // Work backward from current age
+    for (let i = 0; i < effectiveYears; i++) {
+      const yearAge = age - i - 1;
 
       if (yearAge < 22) {
         totalWeeks += 0.5;
@@ -54,7 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     const redundancyPay = (totalWeeks * pay).toFixed(2);
-    resultOutput.textContent = `Statutory Redundancy Pay (${selectedRegion === 'GB' ? 'Great Britain' : 'Northern Ireland'}): £${redundancyPay}`;
+    resultOutput.textContent = `Statutory Redundancy Pay (${region === 'GB' ? 'Great Britain' : 'Northern Ireland'}): £${redundancyPay} (${totalWeeks} weeks)`;
   });
 
   resetBtn.addEventListener('click', function () {
@@ -62,6 +70,6 @@ document.addEventListener('DOMContentLoaded', function () {
     yearsInput.value = '';
     payInput.value = '';
     resultOutput.textContent = '';
-    regionSwitch.checked = false; // Default to GB
+    regionSwitch.checked = false;
   });
 });
