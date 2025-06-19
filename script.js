@@ -5,30 +5,17 @@ document.addEventListener('DOMContentLoaded', function () {
   const resultOutput = document.getElementById('result');
   const calculateBtn = document.getElementById('calculateBtn');
   const resetBtn = document.getElementById('resetBtn');
+  const regionSwitch = document.getElementById('regionSwitch');
 
-  const gbBtn = document.getElementById('gbBtn');
-  const niBtn = document.getElementById('niBtn');
-  let selectedRegion = 'GB';
+  function getSelectedRegion() {
+    return regionSwitch.checked ? 'NI' : 'GB';
+  }
 
-  // Toggle region buttons
-  gbBtn.addEventListener('click', () => {
-    selectedRegion = 'GB';
-    gbBtn.classList.add('selected');
-    niBtn.classList.remove('selected');
-  });
-
-  niBtn.addEventListener('click', () => {
-    selectedRegion = 'NI';
-    niBtn.classList.add('selected');
-    gbBtn.classList.remove('selected');
-  });
-
-  // Calculate redundancy pay
   calculateBtn.addEventListener('click', function () {
     const age = parseInt(ageInput.value);
     const years = parseInt(yearsInput.value);
     let pay = parseFloat(payInput.value);
-
+    const selectedRegion = getSelectedRegion();
     const maxWeeklyPay = selectedRegion === 'GB' ? 700 : 643;
 
     if (isNaN(age) || isNaN(years) || isNaN(pay)) {
@@ -70,14 +57,11 @@ document.addEventListener('DOMContentLoaded', function () {
     resultOutput.textContent = `Statutory Redundancy Pay (${selectedRegion === 'GB' ? 'Great Britain' : 'Northern Ireland'}): £${redundancyPay}`;
   });
 
-  // Reset button
   resetBtn.addEventListener('click', function () {
     ageInput.value = '';
     yearsInput.value = '';
     payInput.value = '';
     resultOutput.textContent = '';
-    selectedRegion = 'GB';
-    gbBtn.classList.add('selected');
-    niBtn.classList.remove('selected');
+    regionSwitch.checked = false; // Default to GB
   });
 });
