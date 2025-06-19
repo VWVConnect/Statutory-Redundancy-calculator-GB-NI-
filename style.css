@@ -1,26 +1,29 @@
-/* General styles */
+/* Base reset */
 html, body {
   margin: 0;
   padding: 0;
+  background-color: white;
   font-family: Arial, sans-serif;
   color: #192543;
-  background-color: white;
 }
 
+/* Container */
 .calculator-container {
   max-width: 500px;
   margin: 40px auto;
   padding: 20px;
   border-radius: 16px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   background-color: white;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
 h1 {
   text-align: center;
   margin-bottom: 24px;
+  font-size: 24px;
 }
 
+/* Labels and inputs */
 label {
   display: block;
   margin-bottom: 6px;
@@ -37,7 +40,7 @@ input[type="number"] {
   box-sizing: border-box;
 }
 
-/* Switch container */
+/* Switch toggle layout */
 .switch-container {
   display: flex;
   align-items: center;
@@ -48,12 +51,12 @@ input[type="number"] {
   font-weight: bold;
 }
 
-/* The actual switch */
+/* Switch */
 .switch {
   position: relative;
   display: inline-block;
   width: 60px;
-  height: 34px;
+  height: 30px;
 }
 
 .switch input {
@@ -62,37 +65,46 @@ input[type="number"] {
   height: 0;
 }
 
-/* Slider */
+/* Slider box */
 .slider {
   position: absolute;
   cursor: pointer;
-  background-color: white;
-  border: 2px solid #00a6c5;
-  border-radius: 34px;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
+  background-color: white;
+  border: 2px solid #00a6c5;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
   transition: 0.4s;
+  border-radius: 6px;
 }
 
+/* Slider button (square) */
 .slider::before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
-  left: 4px;
-  bottom: 3px;
+  height: 24px;
+  width: 24px;
+  left: 3px;
+  top: 2px;
   background-color: #00a6c5;
   transition: 0.4s;
-  border-radius: 50%;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
+/* Checked style */
 input:checked + .slider::before {
-  transform: translateX(26px);
+  transform: translateX(28px);
 }
 
-/* Button styles */
+/* Click feedback */
+.slider:active::before {
+  transform: scale(0.95) translateX(28px);
+}
+
+/* Button layout */
 .button-group {
   display: flex;
   justify-content: space-between;
@@ -120,9 +132,9 @@ button {
   color: white;
 }
 
+/* Result text */
 #result {
   margin-top: 16px;
   font-weight: bold;
   text-align: center;
-  color: #192543;
 }
