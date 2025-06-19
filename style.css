@@ -1,0 +1,93 @@
+/* Base reset and background */
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  font-family: Arial, sans-serif;
+  color: #192543;
+}
+
+/* Calculator container */
+.calculator-container {
+  max-width: 500px;
+  margin: 40px auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Labels */
+label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #192543;
+}
+
+/* Input fields */
+input[type="number"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 16px;
+  border: 2px solid #7fc28f;
+  border-radius: 8px;
+  font-size: 16px;
+  box-sizing: border-box;
+  background-color: white;
+  color: #192543;
+}
+
+/* Radio buttons */
+fieldset {
+  border: none;
+  margin: 10px 0;
+  padding: 0;
+}
+
+legend {
+  font-weight: bold;
+  color: #192543;
+}
+
+label input[type="radio"] {
+  margin-right: 6px;
+  accent-color: #07b0a0;
+}
+
+/* Button container */
+.button-group {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+  margin-top: 20px;
+}
+
+/* Buttons */
+button {
+  flex: 1;
+  padding: 12px;
+  font-size: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+button#calculateBtn {
+  background-color: #07b0a0;
+  color: white;
+}
+
+button#resetBtn {
+  background-color: #7fc28f;
+  color: white;
+}
+
+/* Result output */
+#result {
+  margin-top: 16px;
+  font-weight: bold;
+  color: #192543;
+}
