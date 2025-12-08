@@ -8,7 +8,6 @@
 </head>
 <body>
   <div class="calculator-container">
-
     <label for="age">Age:</label>
     <input type="number" id="age" min="16" max="100" placeholder="e.g. 35" required />
 
@@ -18,7 +17,7 @@
     <label for="pay">Weekly Gross Pay (£):</label>
     <input type="number" id="pay" min="0" placeholder="e.g. 500" required />
 
-    <!-- Region Switch -->
+    <!-- Switch toggle -->
     <div class="switch-container">
       <span>Great Britain</span>
       <label class="switch">
@@ -28,14 +27,8 @@
       <span>Northern Ireland</span>
     </div>
 
-    <!-- Rate Year Buttons -->
-    <div class="rate-buttons-container">
-      <button type="button" class="rate-btn active" data-year="2025">2025–2026</button>
-      <button type="button" class="rate-btn" data-year="2026">2026–2027</button>
-    </div>
-
     <div class="button-group">
-      <button id="calculateBtn" type="button">Calculate</button>
+      <button id="calculateBtn">Calculate</button>
       <button id="resetBtn" type="button">Reset</button>
     </div>
 
