@@ -1,88 +1,159 @@
-alert("NEW SCRIPT LOADED");
-document.addEventListener('DOMContentLoaded', function () {
-  const ageInput = document.getElementById('age');
-  const yearsInput = document.getElementById('years');
-  const payInput = document.getElementById('pay');
-  const resultOutput = document.getElementById('result');
-  const calculateBtn = document.getElementById('calculateBtn');
-  const resetBtn = document.getElementById('resetBtn');
-  const regionSwitch = document.getElementById('regionSwitch');
-  const rateSwitch = document.getElementById('rateSwitch');
+document.addEventListener('DOMContentLoaded', function () { 
 
-function getSelectedRegion() {
-  if (!regionSwitch) {
-    console.warn('regionSwitch not found, defaulting to GB');
-    return 'GB';
-  }
-  return regionSwitch.checked ? 'NI' : 'GB';
-}
+  const ageInput = document.getElementById('age'); 
 
-function getSelectedRateYear() {
-  if (!rateSwitch) {
-    console.warn('rateSwitch not found, defaulting to 2025');
-    return "2025";
-  }
-  return rateSwitch.checked ? "2026" : "2025";
-}
+  const yearsInput = document.getElementById('years'); 
 
-  calculateBtn.addEventListener('click', function () {
-    const age = parseInt(ageInput.value);
-    const years = parseInt(yearsInput.value);
-    let pay = parseFloat(payInput.value);
-    const region = getSelectedRegion();
-    const rateYear = getSelectedRateYear();
+  const payInput = document.getElementById('pay'); 
 
-    const caps = {
-      GB: { "2025": 719, "2026": 719 }, // placeholder for 2026–27
-      NI: { "2025": 749, "2026": 749 }  // placeholder for 2026–27
-    };
+  const resultOutput = document.getElementById('result'); 
 
-    const maxWeeklyPay = caps[region][rateYear];
-    const maxYears = 20;
+  const calculateBtn = document.getElementById('calculateBtn'); 
 
-    // Input validation
-    if (isNaN(age) || isNaN(years) || isNaN(pay)) {
-      resultOutput.textContent = 'Please fill in all fields correctly.';
-      return;
-    }
-    if (age < 16 || age > 100) {
-      resultOutput.textContent = 'Age must be between 16 and 100.';
-      return;
-    }
-    if (years < 0 || years > 50) {
-      resultOutput.textContent = 'Years of service must be between 0 and 50.';
-      return;
-    }
-    if (pay < 0) {
-      resultOutput.textContent = 'Weekly pay must be a positive number.';
-      return;
-    }
+  const resetBtn = document.getElementById('resetBtn'); 
 
-    // Apply statutory cap
-    pay = Math.min(pay, maxWeeklyPay);
+  const regionSwitch = document.getElementById('regionSwitch'); 
 
-    // Only last 20 years count
-    const effectiveYears = Math.min(years, maxYears);
-    let totalWeeks = 0;
+  const rateSwitch = document.getElementById('rateSwitch'); 
 
-    for (let i = 0; i < effectiveYears; i++) {
-      const yearAge = age - i - 1;
-      if (yearAge < 22) totalWeeks += 0.5;
-      else if (yearAge < 41) totalWeeks += 1;
-      else totalWeeks += 1.5;
-    }
+  
 
-    const redundancyPay = (totalWeeks * pay).toFixed(2);
-    resultOutput.textContent =
-      `Statutory Redundancy Pay (${region === 'GB' ? 'Great Britain' : 'Northern Ireland'} – ${rateYear} rates): £${redundancyPay} (${totalWeeks} weeks)`;
-  });
+  function getSelectedRegion() { 
 
-  resetBtn.addEventListener('click', function () {
-    ageInput.value = '';
-    yearsInput.value = '';
-    payInput.value = '';
-    resultOutput.textContent = '';
-if (regionSwitch) regionSwitch.checked = false;
-if (rateSwitch) rateSwitch.checked = false; // reset to 2025–2026
-  });
-});
+    return regionSwitch.checked ? 'NI' : 'GB'; 
+
+  } 
+
+  
+
+  function getSelectedRateYear() { 
+
+    // Toggle: unchecked = 2025–2026, checked = 2026–2027 
+
+    return rateSwitch.checked ? "2026" : "2025"; 
+
+  } 
+
+  
+
+  calculateBtn.addEventListener('click', function () { 
+
+    const age = parseInt(ageInput.value); 
+
+    const years = parseInt(yearsInput.value); 
+
+    let pay = parseFloat(payInput.value); 
+
+    const region = getSelectedRegion(); 
+
+    const rateYear = getSelectedRateYear(); 
+
+  
+
+    const caps = { 
+
+      GB: { "2025": 719, "2026": 719 }, // placeholder for 2026–27 
+
+      NI: { "2025": 749, "2026": 749 }  // placeholder for 2026–27 
+
+    }; 
+
+  
+
+    const maxWeeklyPay = caps[region][rateYear]; 
+
+    const maxYears = 20; 
+
+  
+
+    // Input validation 
+
+    if (isNaN(age) || isNaN(years) || isNaN(pay)) { 
+
+      resultOutput.textContent = 'Please fill in all fields correctly.'; 
+
+      return; 
+
+    } 
+
+    if (age < 16 || age > 100) { 
+
+      resultOutput.textContent = 'Age must be between 16 and 100.'; 
+
+      return; 
+
+    } 
+
+    if (years < 0 || years > 50) { 
+
+      resultOutput.textContent = 'Years of service must be between 0 and 50.'; 
+
+      return; 
+
+    } 
+
+    if (pay < 0) { 
+
+      resultOutput.textContent = 'Weekly pay must be a positive number.'; 
+
+      return; 
+
+    } 
+
+  
+
+    // Apply statutory cap 
+
+    pay = Math.min(pay, maxWeeklyPay); 
+
+  
+
+    // Only last 20 years count 
+
+    const effectiveYears = Math.min(years, maxYears); 
+
+    let totalWeeks = 0; 
+
+  
+
+    for (let i = 0; i < effectiveYears; i++) { 
+
+      const yearAge = age - i - 1; 
+
+      if (yearAge < 22) totalWeeks += 0.5; 
+
+      else if (yearAge < 41) totalWeeks += 1; 
+
+      else totalWeeks += 1.5; 
+
+    } 
+
+  
+
+    const redundancyPay = (totalWeeks * pay).toFixed(2); 
+
+    resultOutput.textContent = 
+
+      `Statutory Redundancy Pay (${region === 'GB' ? 'Great Britain' : 'Northern Ireland'} – ${rateYear} rates): £${redundancyPay} (${totalWeeks} weeks)`; 
+
+  }); 
+
+  
+
+  resetBtn.addEventListener('click', function () { 
+
+    ageInput.value = ''; 
+
+    yearsInput.value = ''; 
+
+    payInput.value = ''; 
+
+    resultOutput.textContent = ''; 
+
+    regionSwitch.checked = false; 
+
+    rateSwitch.checked = false; // reset to 2025–2026 
+
+  }); 
+
+}); 
