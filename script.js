@@ -8,14 +8,21 @@ document.addEventListener('DOMContentLoaded', function () {
   const regionSwitch = document.getElementById('regionSwitch');
   const rateSwitch = document.getElementById('rateSwitch');
 
-  function getSelectedRegion() {
-    return regionSwitch.checked ? 'NI' : 'GB';
+function getSelectedRegion() {
+  if (!regionSwitch) {
+    console.warn('regionSwitch not found, defaulting to GB');
+    return 'GB';
   }
+  return regionSwitch.checked ? 'NI' : 'GB';
+}
 
-  function getSelectedRateYear() {
-    // Toggle: unchecked = 2025–2026, checked = 2026–2027
-    return rateSwitch.checked ? "2026" : "2025";
+function getSelectedRateYear() {
+  if (!rateSwitch) {
+    console.warn('rateSwitch not found, defaulting to 2025');
+    return "2025";
   }
+  return rateSwitch.checked ? "2026" : "2025";
+}
 
   calculateBtn.addEventListener('click', function () {
     const age = parseInt(ageInput.value);
@@ -74,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
     yearsInput.value = '';
     payInput.value = '';
     resultOutput.textContent = '';
-    regionSwitch.checked = false;
-    rateSwitch.checked = false; // reset to 2025–2026
+if (regionSwitch) regionSwitch.checked = false;
+if (rateSwitch) rateSwitch.checked = false; // reset to 2025–2026
   });
 });
