@@ -1,3 +1,4 @@
+alert("NEW SCRIPT LOADED");
 document.addEventListener('DOMContentLoaded', function () {
   const ageInput = document.getElementById('age');
   const yearsInput = document.getElementById('years');
